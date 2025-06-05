@@ -1,6 +1,6 @@
-package br.telecom.user;
+package br.inatel.telecom.user;
 
-import br.telecom.planos.Plano;
+import br.inatel.telecom.planos.Plano;
 
 public class Cliente {
     // Declarando variaveis
@@ -11,7 +11,16 @@ public class Cliente {
     private String telefone;
 
     // Associcao Plano -> Cliente
-    private Plano plano = null;
+    private Plano plano;
+
+    public Cliente(int idCliente, String nome, String cpf, String endereco, String telefone) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }
+
 
     // Getters e Setters
     public int getIdCliente() {
@@ -55,9 +64,6 @@ public class Cliente {
     }
 
     // Funcoes publicas
-    public void cadastrar() {
-
-    }
 
     public void atualizarDados() {
 

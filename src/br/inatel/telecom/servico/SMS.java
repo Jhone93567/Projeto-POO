@@ -1,19 +1,14 @@
-package br.telecom.servico;
+package br.inatel.telecom.servico;
 
 public class SMS extends Consumo{
     // Declarando variaveis
-    private String destion;
 
     // Getters e Setters
 
-
     // Funcoes publicas
-    public void enviarSMS() {
-
-    }
 
     @Override
-    public void calcularCusto() {
-
+    public double calcularCusto(double taxa) {
+        return taxa;
     }
 }

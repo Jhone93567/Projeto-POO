@@ -1,5 +1,4 @@
-package br.telecom.servico;
-
+package br.inatel.telecom.servico;
 import java.util.Date;
 
 public abstract class Consumo {
@@ -13,17 +12,10 @@ public abstract class Consumo {
         return idConsumo;
     }
 
-    public void setIdConsumo(int idConsumo) {
-        this.idConsumo = idConsumo;
-    }
-
     public Date getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Date dataHora) {
-        this.dataHora = dataHora;
-    }
 
     public double getCusto() {
         return custo;
@@ -34,5 +26,6 @@ public abstract class Consumo {
     }
 
     // Funcoes publicas
-    public abstract void calcularCusto();
+    // retorna o custo do consumo
+    public abstract double calcularCusto(double taxa);
 }

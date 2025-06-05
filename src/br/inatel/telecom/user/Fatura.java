@@ -1,23 +1,17 @@
-package br.telecom.user;
-
-import br.telecom.servico.Consumo;
-
-import java.util.ArrayList;
-import java.util.List;
+package br.inatel.telecom.user;
 
 public class Fatura {
     // Declarando variaveis
     private int idFatura;
-    private String mesReferencia;
-    private double valorToral;
-    private String status;
-
-    // Composicao Consumo -> Fatura
-    List<Consumo> consumos;
+    private int mesReferencia;
+    private double valorTotal;
+    private String status = "Aberta";
 
     // Construtor
-    public Fatura() {
-        consumos = new ArrayList<Consumo>();
+    public Fatura(int idFatura, int mesReferencia, double valorTotal) {
+        this.idFatura = idFatura;
+        this.mesReferencia = mesReferencia;
+        this.valorTotal = valorTotal;
     }
 
     // Geters e Setters
@@ -29,20 +23,20 @@ public class Fatura {
         this.idFatura = idFatura;
     }
 
-    public String getMesReferencia() {
+    public int getMesReferencia() {
         return mesReferencia;
     }
 
-    public void setMesReferencia(String mesReferencia) {
+    public void setMesReferencia(int mesReferencia) {
         this.mesReferencia = mesReferencia;
     }
 
-    public double getValorToral() {
-        return valorToral;
+    public double getvalorTotal() {
+        return valorTotal;
     }
 
-    public void setValorToral(double valorToral) {
-        this.valorToral = valorToral;
+    public void setvalorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public String getStatus() {
@@ -54,7 +48,7 @@ public class Fatura {
     }
 
     // Funcoes publicas
-    public void gerarFatura() {
+    public void gerarArquivo() {
 
     }
 
