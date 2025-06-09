@@ -92,10 +92,19 @@ public class PrePago extends Plano{
     @Override
     public void addConsumo(Consumo consumo) {
         if (this.status) {
-            descontarConsumo(consumo);
-            consumos.add(consumo);
+            descontarConsumo(consumo); // subtrai do limite
+
+            // atualiza os valores de consumo após o desconto
+            if (consumo instanceof Chamada) {
+                this.usoMinutos += ((Chamada) consumo).getDuracao(); // atualiza minutos
+            } else if (consumo instanceof SMS) {
+                this.usoSMS += ((SMS) consumo).getQuantidadeSMS(); // atualiza SMS
+            } else if (consumo instanceof DadosMoveis) {
+                this.usoDados += ((DadosMoveis) consumo).getQuantidadeMB(); // atualiza dados
+            }
+            consumos.add(consumo); // adiciona o consumo à lista
         } else {
-            System.out.println("Seu plano esta inativo. Ative seu plano e tente novamente.");
+            System.out.println("Seu plano está inativo. Ative seu plano e tente novamente.");
         }
     }
 }
