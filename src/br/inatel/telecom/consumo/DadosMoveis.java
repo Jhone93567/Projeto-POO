@@ -1,6 +1,6 @@
 package br.inatel.telecom.consumo;
 
-public class DadosMoveis extends Consumo {
+public class DadosMoveis implements Consumo {
 
     // variável específica de DadosMoveis
     private int quantidadeMB;

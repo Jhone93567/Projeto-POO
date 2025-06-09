@@ -1,6 +1,6 @@
 package br.inatel.telecom.consumo;
 
-public class SMS extends Consumo{
+public class SMS implements Consumo{
 
     // variável específica de Consumo
     private int quantidadeSMS;

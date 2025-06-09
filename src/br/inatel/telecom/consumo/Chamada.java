@@ -1,6 +1,6 @@
 package br.inatel.telecom.consumo;
 
-public class Chamada extends Consumo {
+public class Chamada implements Consumo {
 
     // variável específica de Chamada
     private final int duracao;
