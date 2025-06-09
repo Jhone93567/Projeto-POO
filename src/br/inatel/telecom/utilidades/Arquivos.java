@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class Arquivos {
+public abstract class Arquivos {
     // recebe o caminho, cria uma pasta nesse caminho
     public static void criarPasta (String nomePasta){
         Path caminhoDaPasta = Paths.get(nomePasta);

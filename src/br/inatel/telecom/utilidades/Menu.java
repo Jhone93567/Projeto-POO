@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public abstract class Menu {
 
     public static void mostraMenu(Cliente cliente){
         System.out.println();
