@@ -1,4 +1,0 @@
-Fatura 2
-Valor Total: 0,00
-Status: Aberta
-Mes: junho
