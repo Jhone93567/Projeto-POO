@@ -1,9 +1,9 @@
 package br.inatel.telecom.planos;
 
-import br.inatel.telecom.servico.Chamada;
-import br.inatel.telecom.servico.Consumo;
-import br.inatel.telecom.servico.DadosMoveis;
-import br.inatel.telecom.servico.SMS;
+import br.inatel.telecom.consumo.Chamada;
+import br.inatel.telecom.consumo.Consumo;
+import br.inatel.telecom.consumo.DadosMoveis;
+import br.inatel.telecom.consumo.SMS;
 
 public class PrePago extends Plano{
 
@@ -13,12 +13,13 @@ public class PrePago extends Plano{
     private int limiteDados;
 
     // construtor
-    public PrePago(String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados) {
+    public PrePago(String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados, boolean status) {
         this.nome = nome;
         this.valorMensal = valorMensal;
         this.limiteMinutos = limiteMinutos;
         this.limiteSMS = limiteSMS;
         this.limiteDados = limiteDados;
+        this.status = status;
     }
 
     // função privada que desconta o consumo (é chamada apenas internamente para controlar o consumo do plano)

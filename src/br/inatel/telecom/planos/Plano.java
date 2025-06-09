@@ -1,6 +1,6 @@
 package br.inatel.telecom.planos;
 
-import br.inatel.telecom.servico.Consumo;
+import br.inatel.telecom.consumo.Consumo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +13,11 @@ public abstract class Plano {
     protected int usoMinutos = 0;
     protected int usoSMS = 0;
     protected int usoDados = 0;
-    protected boolean status = false;
+    protected boolean status;
 
-    // composição Consumo -> Plano
+    // agregação Consumo -> Plano
     protected List<Consumo> consumos = new ArrayList<>(); // a cada plano está associada uma lista de consumos
-
+    private Consumo consumo;
     // getters e setters
 
     public String getNome() {

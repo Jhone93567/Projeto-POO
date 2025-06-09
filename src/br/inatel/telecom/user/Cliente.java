@@ -11,17 +11,16 @@ public class Cliente {
     private String cpf;
     private String endereco;
     private String telefone;
-
-    // associação Plano -> Cliente
     private Plano plano;
 
     // construtor
-    public Cliente(int idCliente, String nome, String cpf, String endereco, String telefone) {
+    public Cliente(int idCliente, String nome, String cpf, String endereco, String telefone, Plano plano) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.plano = plano; // composiçao Plano -> Cliente
     }
 
     // getters e setters
@@ -59,7 +58,7 @@ public class Cliente {
                     fatura.gerarArquivo();
                 }
             } else {
-                System.out.println("Plano pré-pago não gera fatura.");
+                System.out.println("Não foi possível gerar a fatura");
             }
         } else {
             System.out.println("Plano não ativo ou não atribuído ao cliente.");
@@ -77,15 +76,6 @@ public class Cliente {
             System.out.println("Minutos: " + minutos + ", SMS: " + sms + ", Dados: " + dados + " MB.");
         } else {
             System.out.println("Plano não ativo ou não atribuído ao cliente.");
-        }
-    }
-
-    // função que adiciona um plano ao cliente
-    public void addPlano(Plano plano) {
-        if (this.plano == null) {
-            this.plano = plano;
-        } else {
-            System.out.println("Este cliente já possui um plano.");
         }
     }
 }

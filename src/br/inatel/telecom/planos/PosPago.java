@@ -1,5 +1,5 @@
 package br.inatel.telecom.planos;
-import br.inatel.telecom.servico.*;
+import br.inatel.telecom.consumo.*;
 import br.inatel.telecom.user.Fatura;
 import java.time.LocalDate;
 import java.time.Month;
@@ -13,16 +13,22 @@ public class PosPago extends Plano{
     private static int idFatura = 0;
 
     // construtor
-    public PosPago(String nome, double taxaPorMB) {
+    public PosPago(String nome, double taxaPorMB, boolean status) {
         this.nome = nome;
         this.taxaPorMB = taxaPorMB;
         this.taxaPorSMS = taxaPorMB * 0.05;
         this.taxaPorMinutos = taxaPorMB * 0.1;
+        this.status = status;
 
     }
 
     // função pública que gera fatura
     public Fatura gerarFatura() {
+        if(this.consumos.isEmpty())
+        {
+            System.out.println("Não há consumos!");
+            return null;
+        }
         if(this.status) { // caso o plano esteja ativo
             double total = 0;
             for (Consumo consumo : consumos) { // consumo está referenciando todos os objetos da lista consumos

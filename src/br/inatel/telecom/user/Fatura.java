@@ -19,7 +19,7 @@ public class Fatura {
         this.mesReferencia = mesReferencia;
         this.valorTotal = valorTotal;
         // pegando o mes
-        mesString = new DateFormatSymbols().getMonths()[mesReferencia];
+        mesString = new DateFormatSymbols().getMonths()[mesReferencia - 1];
     }
 
     // getters e setters
