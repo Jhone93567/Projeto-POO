@@ -5,6 +5,11 @@ public class SMS extends Consumo{
     // variável específica de Consumo
     private int quantidadeSMS;
 
+    // Construtor
+    public SMS(int quantidadeSMS) {
+        this.quantidadeSMS = quantidadeSMS;
+    }
+
     // getter
     public int getQuantidadeSMS() {
         return quantidadeSMS;

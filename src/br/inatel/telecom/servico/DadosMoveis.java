@@ -5,6 +5,11 @@ public class DadosMoveis extends Consumo {
     // variável específica de DadosMoveis
     private int quantidadeMB;
 
+    // construtor
+    public DadosMoveis(int quantidadeMB) {
+        this.quantidadeMB = quantidadeMB;
+    }
+
     // getter
     public int getQuantidadeMB() {
         return quantidadeMB;

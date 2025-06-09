@@ -222,6 +222,7 @@ public class Main {
                                 }
                             }
                             consumo = new Chamada(duracao);
+                            cliente.getPlano().addConsumo(consumo);
                             break;
 
                         case 2: // SMS
@@ -237,9 +238,8 @@ public class Main {
                                     sc.nextLine();
                                 }
                             }
-                            SMS sms = new SMS();
-                            sms.setQuantidadeSMS(qtd_SMS);
-                            consumo = sms;
+                            consumo = new SMS(qtd_SMS);
+                            cliente.getPlano().addConsumo(consumo);
                             break;
 
                         case 3: // dados móveis
@@ -255,9 +255,8 @@ public class Main {
                                     sc.nextLine();
                                 }
                             }
-                            DadosMoveis dados = new DadosMoveis();
-                            dados.setQuantidadeMB(qtd_MB);
-                            consumo = dados;
+                            consumo = new DadosMoveis(qtd_MB);
+                            cliente.getPlano().addConsumo(consumo);
                             break;
 
                         default:
