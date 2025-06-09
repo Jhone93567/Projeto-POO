@@ -11,7 +11,7 @@ public class Arquivos {
     public static void criarPasta (String nomePasta){
         Path caminhoDaPasta = Paths.get(nomePasta);
         try {
-            // Cria a pasta se ela não existir
+            // cria a pasta se ela não existir
             if (!Files.exists(caminhoDaPasta)) {
                 Files.createDirectories(caminhoDaPasta);
             }
@@ -19,6 +19,7 @@ public class Arquivos {
             e.printStackTrace();
         }
     }
+
     // recebe nome da pasta, do arquivo, e das linhas
     // escreve uma lista de strings no arquivo
     public static void Escrever(String pasta, String nomeArq, List<String> linhas){
@@ -31,12 +32,12 @@ public class Arquivos {
             Files.write(
                     caminho,
                     linhas,
-                    StandardOpenOption.APPEND
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE
             );
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-
-

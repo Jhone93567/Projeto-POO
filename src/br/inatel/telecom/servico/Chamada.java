@@ -1,23 +1,23 @@
 package br.inatel.telecom.servico;
-import br.inatel.telecom.user.Cliente;
 
+public class Chamada extends Consumo {
 
-public class Chamada extends Consumo{
-    // Declarando variaveis
-    private int duracao;
+    // variável específica de Chamada
+    private final int duracao;
 
-    public Chamada(int duracao, Cliente remetente, Cliente destinatario) {
+    // construtor
+    public Chamada(int duracao) {
         this.duracao = duracao;
     }
 
-    // Getters e Setters
+    // getter
     public int getDuracao() {
         return duracao;
     }
 
-    // Funcoes publicas
+    // método sobrescrito de Consumo
     @Override
-    public double calcularCusto(double taxa){
-        return (double)duracao * taxa;
+    public double calcularCusto(double taxa) {
+        return duracao * taxa;
     }
 }

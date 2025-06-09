@@ -1,14 +1,23 @@
 package br.inatel.telecom.servico;
 
 public class SMS extends Consumo{
-    // Declarando variaveis
 
-    // Getters e Setters
+    // variável específica de Consumo
+    private int quantidadeSMS;
 
-    // Funcoes publicas
+    // getter
+    public int getQuantidadeSMS() {
+        return quantidadeSMS;
+    }
 
+    // setter
+    public void setQuantidadeSMS(int quantidadeSMS) {
+        this.quantidadeSMS = quantidadeSMS;
+    }
+
+    // método sobrescrito de Consumo
     @Override
     public double calcularCusto(double taxa) {
-        return taxa;
+        return quantidadeSMS * taxa;
     }
 }

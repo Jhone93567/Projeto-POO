@@ -1,0 +1,4 @@
+Fatura 2 - Mês: 6
+Valor Total: 1508.4
+Status: Aberta
+Mes: julho

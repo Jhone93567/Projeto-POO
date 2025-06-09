@@ -1,59 +1,67 @@
 package br.inatel.telecom.planos;
-import br.inatel.telecom.servico.Consumo;
+import br.inatel.telecom.servico.*;
 import br.inatel.telecom.user.Fatura;
 import java.time.LocalDate;
 import java.time.Month;
 
 public class PosPago extends Plano{
-    // Declarando variaveis
-    private double taxaPorMB;
 
-    // Construtor
-    public PosPago(int idPlano, String nome, double valorMensal, double taxaPorMB) {
-        this.idPlano = idPlano;
+    // variável específica de PosPago
+    private final double taxaPorMB;
+    private final double taxaPorSMS;
+    private final double taxaPorMinutos;
+    private static int idFatura = 0;
+
+    // construtor
+    public PosPago(String nome, double taxaPorMB) {
         this.nome = nome;
-        this.valorMensal = valorMensal;
         this.taxaPorMB = taxaPorMB;
+        this.taxaPorSMS = taxaPorMB * 0.05;
+        this.taxaPorMinutos = taxaPorMB * 0.1;
+
     }
 
-    // Getters e setters
-    public double getTaxaPorMB() {
-        return taxaPorMB;
-    }
-
-    public void setTaxaPorMB(float taxaPorMB) {
-        this.taxaPorMB = taxaPorMB;
-    }
-
-
-
-    // Funcoes Publicas
+    // função pública que gera fatura
     public Fatura gerarFatura() {
-        if(this.status) {
+        if(this.status) { // caso o plano esteja ativo
             double total = 0;
-            for (Consumo consumo : consumos) {
-                total += consumo.calcularCusto(taxaPorMB);
+            for (Consumo consumo : consumos) { // consumo está referenciando todos os objetos da lista consumos
+                if(consumo instanceof DadosMoveis)
+                    total += consumo.calcularCusto(taxaPorMB);
+                else if(consumo instanceof Chamada)
+                    total += consumo.calcularCusto(taxaPorMinutos);
+                else if(consumo instanceof SMS)
+                    total += consumo.calcularCusto(taxaPorSMS);
             }
 
-            // Codigo para pegar o mes atual
-            LocalDate dataAtual = LocalDate.now();
+            // código para pegar o mês atual
             Month mesAtual = LocalDate.now().getMonth();
             idFatura++;
-            return new Fatura(idFatura,mesAtual.getValue(), total);
+            return new Fatura(idFatura,mesAtual.getValue(), total); // retorna uma nova fatura (idfatura, mesReferencia, valorTotal)
         }
-        else {
-            System.out.println("Seu plano esta inativo. Ative seu plano e tente novamente.");
+        else { // caso o plano não esteja ativo
+            System.out.println("Seu plano está inativo. Ative seu plano e tente novamente.");
             return null;
         }
     }
 
+    // método sobrescrito de Plano
     @Override
     public void addConsumo(Consumo consumo) {
-        if (this.status){
+        if (this.status) {
+
             consumos.add(consumo);
-        }
-        else {
-            System.out.println("Seu plano esta inativo. Ative seu plano e tente novamente.");
+
+            if (consumo instanceof Chamada) {
+                this.usoMinutos += ((Chamada) consumo).getDuracao();
+            } else if (consumo instanceof SMS) {
+                this.usoSMS += ((SMS) consumo).getQuantidadeSMS();
+            } else if (consumo instanceof DadosMoveis) {
+                this.usoDados += ((DadosMoveis) consumo).getQuantidadeMB();
+            }
+
+        } else {
+            System.out.println("Seu plano está inativo. Ative seu plano e tente novamente.");
         }
     }
 }

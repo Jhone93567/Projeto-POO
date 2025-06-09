@@ -1,17 +1,23 @@
 package br.inatel.telecom.servico;
 
-public class DadosMoveis extends Consumo{
-    // Declarando variaveis
+public class DadosMoveis extends Consumo {
+
+    // variável específica de DadosMoveis
     private int quantidadeMB;
 
-    // Getter
+    // getter
     public int getQuantidadeMB() {
         return quantidadeMB;
     }
 
-    // Funcoes publicas
+    // setter
+    public void setQuantidadeMB(int quantidadeMB) {
+        this.quantidadeMB = quantidadeMB;
+    }
+
+    // método sobrescrito de Consumo
     @Override
     public double calcularCusto(double taxa) {
-        return (double)quantidadeMB * taxa;
+        return quantidadeMB * taxa;
     }
 }

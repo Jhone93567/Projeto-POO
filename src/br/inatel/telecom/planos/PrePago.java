@@ -6,14 +6,14 @@ import br.inatel.telecom.servico.DadosMoveis;
 import br.inatel.telecom.servico.SMS;
 
 public class PrePago extends Plano{
-    // Declarando variaveis
-    protected int limiteMinutos;
-    protected int limiteSMS;
-    protected int limiteDados;
 
-    // Construtor
-    public PrePago(int idPlano, String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados, double saldo) {
-        this.idPlano = idPlano;
+    // variáveis específicas de PrePago
+    private int limiteMinutos;
+    private int limiteSMS;
+    private int limiteDados;
+
+    // construtor
+    public PrePago(String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados) {
         this.nome = nome;
         this.valorMensal = valorMensal;
         this.limiteMinutos = limiteMinutos;
@@ -21,40 +21,34 @@ public class PrePago extends Plano{
         this.limiteDados = limiteDados;
     }
 
-    // Getters
-    public int getLimiteMinutos() {
-        return limiteMinutos;
-    }
-
-    public int getLimiteSMS() {
-        return limiteSMS;
-    }
-
-    public int getLimiteDados() {
-        return limiteDados;
-    }
-
-    // Funcoes privadas
+    // função privada que desconta o consumo (é chamada apenas internamente para controlar o consumo do plano)
     private void descontarConsumo(Consumo consumo) {
         if (consumo instanceof DadosMoveis) {
-            if (this.usoDados + ((DadosMoveis) consumo).getQuantidadeMB() > limiteDados)
+            int qtd = ((DadosMoveis) consumo).getQuantidadeMB();
+            if (this.limiteDados < qtd)
                 throw new RuntimeException("Limite de dados excedido.");
             else
-                this.usoDados += ((DadosMoveis) consumo).getQuantidadeMB();
+                this.limiteDados -= qtd; // subtrai o consumo diretamente do limite
+
         } else if (consumo instanceof SMS) {
-            if (this.usoSMS + 1 > limiteSMS)
+            int qtd = ((SMS) consumo).getQuantidadeSMS();
+            if (this.limiteSMS < qtd)
                 throw new RuntimeException("Limite de SMS excedido.");
             else
-                this.usoSMS ++;
+                this.limiteSMS -= qtd;
+
         } else if (consumo instanceof Chamada) {
-            if (usoMinutos + ((Chamada) consumo).getDuracao() > limiteMinutos)
+            int duracao = ((Chamada) consumo).getDuracao();
+            if (this.limiteMinutos < duracao)
                 throw new RuntimeException("Limite de minutos excedido.");
             else
-                this.usoMinutos += ((Chamada) consumo).getDuracao();
+                this.limiteMinutos -= duracao;
         }
-    }
 
-    // Funcoes publicas
+    }
+    // caso o uso de dados/SMS/minutos ultrapasse o limite, o código lança uma excessão que é capturada no bloco try catch dentro do método addConsumo
+
+    // função pública que recarrega o saldo para minutos de chamada
     public void recarregarSaldoMinutos(int valor) {
         if (this.status) {
             this.limiteMinutos += valor;
@@ -65,6 +59,7 @@ public class PrePago extends Plano{
         }
     }
 
+    // função pública que recarrega o saldo para SMS
     public void recarregarSaldoSMS(int valor) {
         if (this.status) {
             this.limiteSMS += valor;
@@ -75,6 +70,7 @@ public class PrePago extends Plano{
         }
     }
 
+    // função pública que recarrega o saldo para dados móveis
     public void recarregarSaldoDados(int valor) {
         if (this.status) {
             this.limiteDados += valor;
@@ -85,25 +81,20 @@ public class PrePago extends Plano{
         }
     }
 
+    // função pública que exibe quanto limite de minutos, SMS e dados o cliente ainda tem
     public void verificarLimites() {
         System.out.println("Limite de minutos: " + limiteMinutos + " minutos");
         System.out.println("Limite de sms: " + limiteSMS + " sms");
         System.out.println("Limite de dados moveis: " + limiteDados + "Mb");
     }
 
-
-    // Tratamento de erro usando try-catch
+    // método sobrescrito de Plano
     @Override
     public void addConsumo(Consumo consumo) {
         if (this.status) {
-            try {
-                descontarConsumo(consumo);
-                consumos.add(consumo);
-            } catch (RuntimeException e) {
-                System.out.println("Erro: " + e.getMessage());
-            }
-        }
-        else {
+            descontarConsumo(consumo);
+            consumos.add(consumo);
+        } else {
             System.out.println("Seu plano esta inativo. Ative seu plano e tente novamente.");
         }
     }

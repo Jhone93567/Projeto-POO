@@ -1,14 +1,12 @@
 package br.inatel.telecom.planos;
 
 import br.inatel.telecom.servico.Consumo;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Plano {
-    protected static int idFatura = 0;
 
-    // Declarando variaveis
+    // variáveis de Plano
     protected int idPlano;
     protected String nome;
     protected double valorMensal;
@@ -17,24 +15,13 @@ public abstract class Plano {
     protected int usoDados = 0;
     protected boolean status = false;
 
-    // Composicao Consumo -> Plano
-    protected List<Consumo> consumos = new ArrayList<>();
+    // composição Consumo -> Plano
+    protected List<Consumo> consumos = new ArrayList<>(); // a cada plano está associada uma lista de consumos
 
-    // Getters e Setters
-    public int getIdPlano() {
-        return idPlano;
-    }
+    // getters e setters
 
     public String getNome() {
         return nome;
-    }
-
-    public double getValorMensal() {
-        return valorMensal;
-    }
-
-    public void setValorMensal(double valorMensal) {
-        this.valorMensal = valorMensal;
     }
 
     public boolean getStatus() {
@@ -53,9 +40,11 @@ public abstract class Plano {
         return usoDados;
     }
 
-    // Funcoes publicas
+    // função pública para ativar o plano (quando ela for chamada o plano é ativado)
     public void ativarPlano() {
         this.status = true;
     }
+
+    // método abstrato (deve ser implementado em PosPago e PrePago)
     public abstract void addConsumo(Consumo consumo);
 }
