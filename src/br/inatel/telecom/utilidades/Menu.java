@@ -91,7 +91,6 @@ public class Menu {
             System.out.println("Cliente e plano pós-pago cadastrados.");
         } else {
             System.out.print("Nome do plano: ");
-            System.out.print("Nome do plano: ");
             String nomePlano = sc.nextLine();
             System.out.print("Valor mensal: ");
             double valor;
@@ -306,15 +305,12 @@ public class Menu {
         System.out.print("Digite o ID do cliente que deseja selecionar: ");
         int idSelecionado = sc.nextInt();
         sc.nextLine();
-        cliente = null;
         for (Cliente c : clientes) {
             if (c.getIdCliente() == idSelecionado) {
-                return cliente;
+                return c;
             }
         }
-        if(cliente == null) {
-            System.out.println("Cliente com ID " + idSelecionado + " não encontrado.");
-        }
+        System.out.println("Cliente com ID " + idSelecionado + " não encontrado.");
         return null;
     }
 

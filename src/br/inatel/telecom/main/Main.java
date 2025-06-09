@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static int id = 0;
+    static int id = 1;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int opcao;
@@ -77,11 +77,11 @@ public class Main {
                 case 6: // recarregar saldo
                     if (cliente == null) {
                         System.out.println("Nenhum cliente cadastrado.");
-                        return;
+                        break;
                     }
                     else if (!(cliente.getPlano() instanceof PrePago)) {
                         System.out.println("Recarregamento disponível apenas para planos pré-pagos.");
-                        return;
+                        break;
                     }
                     else
                         Menu.recarregaSaldo(cliente, sc);

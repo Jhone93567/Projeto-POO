@@ -1,4 +1,4 @@
 Fatura 1
-Valor Total: 0,40
+Valor Total: 2,00
 Status: Aberta
 Mes: junho
