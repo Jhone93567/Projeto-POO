@@ -79,7 +79,7 @@ public class Main {
                         System.out.println("Telefone inválido, tente novamente.");
                         telefone = sc.nextLine();
                     }
-                    cliente = new Cliente(id++, nome, cpf, endereco, telefone); // ID fixo por enquanto
+                    cliente = new Cliente(id++, nome, cpf, endereco, telefone);
 
                     clientes.add(cliente);
 
