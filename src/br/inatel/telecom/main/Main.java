@@ -38,7 +38,7 @@ public class Main {
             System.out.println();
             System.out.print("Escolha uma opção: ");
 
-            while (true) { // verifica se a opção escolhida está entre 1 e 8
+            while (true) { // verifica se a opção escolhida está entre 1 e 9
 
                 try {
                     opcao = sc.nextInt();
