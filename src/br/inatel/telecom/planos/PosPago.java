@@ -13,12 +13,11 @@ public class PosPago extends Plano{
     private static int idFatura = 0;
 
     // construtor
-    public PosPago(String nome, double taxaPorMB, boolean status) {
+    public PosPago(String nome, double taxaPorMB) {
         this.nome = nome;
         this.taxaPorMB = taxaPorMB;
         this.taxaPorSMS = taxaPorMB * 0.05;
         this.taxaPorMinutos = taxaPorMB * 0.1;
-        this.status = status;
 
     }
 

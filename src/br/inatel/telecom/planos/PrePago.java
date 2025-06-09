@@ -13,16 +13,15 @@ public class PrePago extends Plano{
     private int limiteDados;
 
     // construtor
-    public PrePago(String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados, boolean status) {
+    public PrePago(String nome, double valorMensal, int limiteMinutos, int limiteSMS, int limiteDados) {
         this.nome = nome;
         this.valorMensal = valorMensal;
         this.limiteMinutos = limiteMinutos;
         this.limiteSMS = limiteSMS;
         this.limiteDados = limiteDados;
-        this.status = status;
     }
 
-    // função privada que desconta o consumo (é chamada apenas internamente para controlar o consumo do plano)
+    // metodo privado que desconta o consumo (é chamada apenas internamente para controlar o consumo do plano)
     private void descontarConsumo(Consumo consumo) {
         if (consumo instanceof DadosMoveis) {
             int qtd = ((DadosMoveis) consumo).getQuantidadeMB();
@@ -49,7 +48,7 @@ public class PrePago extends Plano{
     }
     // caso o uso de dados/SMS/minutos ultrapasse o limite, o código lança uma excessão que é capturada no bloco try catch dentro do método addConsumo
 
-    // função pública que recarrega o saldo para minutos de chamada
+    // metodo público que recarrega o saldo para minutos de chamada
     public void recarregarSaldoMinutos(int valor) {
         if (this.status) {
             this.limiteMinutos += valor;
@@ -60,7 +59,7 @@ public class PrePago extends Plano{
         }
     }
 
-    // função pública que recarrega o saldo para SMS
+    // método público que recarrega o saldo para SMS
     public void recarregarSaldoSMS(int valor) {
         if (this.status) {
             this.limiteSMS += valor;
@@ -71,7 +70,7 @@ public class PrePago extends Plano{
         }
     }
 
-    // função pública que recarrega o saldo para dados móveis
+    // método público que recarrega o saldo para dados móveis
     public void recarregarSaldoDados(int valor) {
         if (this.status) {
             this.limiteDados += valor;
@@ -82,7 +81,7 @@ public class PrePago extends Plano{
         }
     }
 
-    // função pública que exibe quanto limite de minutos, SMS e dados o cliente ainda tem
+    // método público que exibe quanto limite de minutos, SMS e dados o cliente ainda tem
     public void verificarLimites() {
         System.out.println("Limite de minutos: " + limiteMinutos + " minutos");
         System.out.println("Limite de sms: " + limiteSMS + " sms");

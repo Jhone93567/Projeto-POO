@@ -85,7 +85,8 @@ public class Menu {
                 }
             }
 
-            PosPago pos_pago = new PosPago(nomePlano, taxa, true);
+            PosPago pos_pago = new PosPago(nomePlano, taxa);
+            pos_pago.ativarPlano();
             cliente = new Cliente(id, nome, cpf, endereco, telefone, pos_pago);
             clientes.add(cliente);
             System.out.println("Cliente e plano pós-pago cadastrados.");
@@ -143,7 +144,8 @@ public class Menu {
                     sc.nextLine();
                 }
             }
-            PrePago pre_pago = new PrePago(nomePlano, valor, min, sms, dados, true);
+            PrePago pre_pago = new PrePago(nomePlano, valor, min, sms, dados);
+            pre_pago.ativarPlano();
             cliente = new Cliente(id, nome, cpf, endereco, telefone, pre_pago);
             clientes.add(cliente);
             System.out.println("Cliente e plano pré-pago cadastrados.");
